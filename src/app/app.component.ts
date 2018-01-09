@@ -17,21 +17,21 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.collegues = [];
-    let thien = new Collegue("Thien-ban", "person.png", 100);
+    let thien = new Collegue("Thien-ban", "thienban.jpg", 100);
     this.collegues.push(thien);
     let clement = new Collegue("Clément", "clement.jpg", 100);
     this.collegues.push(clement);
-    let melodie = new Collegue("Mélodie", "person.png", 100);
+    let melodie = new Collegue("Mélodie", "chloe.jpg", 100);
     this.collegues.push(melodie);
-    let sandra = new Collegue("Sandra", "person.png", 100);
+    let sandra = new Collegue("Sandra", "cat.jpg", 100);
     this.collegues.push(sandra);
-    let assia = new Collegue("Assia", "person.png", 100);
+    let assia = new Collegue("Assia", "max.jpg", 100);
     this.collegues.push(assia);
-    let alex = new Collegue("Alexandre", "person.png", 100);
+    let alex = new Collegue("Alexandre", "olga.jpg", 100);
     this.collegues.push(alex);
-    let momo = new Collegue("Mohammed", "person.png", 100);
+    let momo = new Collegue("Mohammed", "beer.png", 100);
     this.collegues.push(momo);
-    let yves = new Collegue("Yves", "person.png", 100);
+    let yves = new Collegue("Yves", "yves.jpeg", 100);
     this.collegues.push(yves);
 
   }
