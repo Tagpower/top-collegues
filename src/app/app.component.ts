@@ -23,7 +23,7 @@ export class AppComponent implements OnInit {
     this.collegues.push(thien);
     let clement = new Collegue("Clément", LOCAL_PATH_PREFIX+"clement.jpg", 100);
     this.collegues.push(clement);
-    let melodie = new Collegue("Mélodie", LOCAL_PATH_PREFIX+"chloe.jpg", 100);
+    let melodie = new Collegue("Mélodie", LOCAL_PATH_PREFIX+"chloe2.jpg", 100);
     this.collegues.push(melodie);
     let sandra = new Collegue("Sandra", LOCAL_PATH_PREFIX+"cat.jpg", 100);
     this.collegues.push(sandra);
@@ -58,6 +58,18 @@ export class AppComponent implements OnInit {
 
   closeAlert() {
     this.afficherAlert = false;
+  }
+
+  sortCollegues() {
+    this.collegues.sort(function(a, b) {
+      if (a.score < b.score) {
+        return -1;
+      } else if (a.score > b.score){
+        return 1;
+      } else {
+        return 0;
+      }
+    })
   }
 
 }
