@@ -2,12 +2,14 @@ import { Component } from '@angular/core';
 import {Collegue} from "./shared/domain/collegue";
 import {OnInit} from '@angular/core/src/metadata/lifecycle_hooks';
 
+const LOCAL_PATH_PREFIX = "../../assets/img/"
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+
 
 export class AppComponent implements OnInit {
   
@@ -17,21 +19,21 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.collegues = [];
-    let thien = new Collegue("Thien-ban", "thienban.jpg", 100);
+    let thien = new Collegue("Thien-ban", LOCAL_PATH_PREFIX+"musk.jpg", 100);
     this.collegues.push(thien);
-    let clement = new Collegue("Clément", "clement.jpg", 100);
+    let clement = new Collegue("Clément", LOCAL_PATH_PREFIX+"clement.jpg", 100);
     this.collegues.push(clement);
-    let melodie = new Collegue("Mélodie", "chloe.jpg", 100);
+    let melodie = new Collegue("Mélodie", LOCAL_PATH_PREFIX+"chloe.jpg", 100);
     this.collegues.push(melodie);
-    let sandra = new Collegue("Sandra", "cat.jpg", 100);
+    let sandra = new Collegue("Sandra", LOCAL_PATH_PREFIX+"cat.jpg", 100);
     this.collegues.push(sandra);
-    let assia = new Collegue("Assia", "max.jpg", 100);
+    let assia = new Collegue("Assia", LOCAL_PATH_PREFIX+"max.jpg", 100);
     this.collegues.push(assia);
-    let alex = new Collegue("Alexandre", "olga.jpg", 100);
+    let alex = new Collegue("Alexandre", LOCAL_PATH_PREFIX+"olga.jpg", 100);
     this.collegues.push(alex);
-    let momo = new Collegue("Mohammed", "beer.png", 100);
+    let momo = new Collegue("Mohammed", LOCAL_PATH_PREFIX+"beer.png", 100);
     this.collegues.push(momo);
-    let yves = new Collegue("Yves", "yves.jpeg", 100);
+    let yves = new Collegue("Yves", LOCAL_PATH_PREFIX+"yves.jpeg", 100);
     this.collegues.push(yves);
 
   }

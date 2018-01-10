@@ -1,11 +1,11 @@
 <div class="card" style="width: 15rem; margin: 5px">
-  <img class="card-img-top" src="../../assets/img/{{collegue._image}}">
+  <img class="card-img-top" src="{{collegue._image}}">
   <div class="card-body" style="text-align:center">
     <div class="card-title">{{collegue._nom}}</div>
 
     <b>{{collegue._score}}</b>
 
-    <!-- TODO composant boutons -->
+    <app-likebuttons (reaction)="reaction($event)"></app-likebuttons>
 
   </div>
 </div>

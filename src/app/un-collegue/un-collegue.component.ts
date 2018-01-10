@@ -9,19 +9,27 @@ import { Collegue } from '../shared/domain/collegue';
 export class UnCollegueComponent implements OnInit {
 
   @Input() collegue:Collegue
+  state = 'normal';
 
   constructor() { }
 
   ngOnInit() {
   }
 
-  jaime() {
-    //this.collegue += 10;
-  }
-
-  jaimepas() {
-    //this.collegue -= 10;
-
-  }
+  reaction(event) {
+    if (event === 'like') {
+      this.collegue.score += 10;
+    } else if (event === 'dislike') {
+      this.collegue.score -= 5;
+    } else if (event === 'super-like') {
+      this.collegue.score += 25;
+    } else if (event === 'super-dislike') {
+      this.collegue.score -= 15;
+    }
+    this.state = event;
+    setTimeout(() => {
+      this.state = 'normal';
+    }, 100);
+}
 
 }
