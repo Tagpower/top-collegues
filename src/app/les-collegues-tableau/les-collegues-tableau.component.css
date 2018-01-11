@@ -1,0 +1,11 @@
+.image {
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+    /* border: 1px solid black; */
+  }
+  
+  div img {
+      width: 100%;
+      min-height: 100%;
+  }

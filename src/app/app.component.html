@@ -22,21 +22,22 @@
     </form>
   </div>
 
+  <nav>
+    <!-- définition d'un lien basé sur les routes. -->
+    <a routerLink="/classique">Classique</a>
+    <a routerLink="/tableau">Tableau</a>
+    <a routerLink="/carrousel">Carrousel</a>
+  </nav>
+
 
 </div>
 
 <!-- {{collegues | json}} -->
 
 <div class="album text-muted">
-    <div class="container">
+    <div class="container" id=content>
 
-      <div class="row">
-
-          <p *ngFor="let col of collegues">  
-              <app-un-collegue [collegue]=col ></app-un-collegue>
-          </p>
-
-      </div>
+        <router-outlet></router-outlet>
 
     </div>
 </div>

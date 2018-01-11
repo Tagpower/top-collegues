@@ -1,0 +1,32 @@
+<div class="row">
+    
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>  
+        <th></th>
+        <th>Pseudo</th>
+        <th>Score</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+
+        <!-- <app-un-collegue-tableau *ngFor="let col of collegues" [collegue]=col></app-un-collegue-tableau> -->
+        <tr *ngFor="let col of collegues">
+
+            <td>
+              <div class="image">
+                <img src="{{col.image}}">
+              </div>
+            </td>
+            <td> <div class="card-title">{{col.pseudo}}</div> </td>
+            <td> <b id="score">{{col.score}}</b> </td>
+            <td> <app-likebuttons [collegue]="col"></app-likebuttons> </td>
+            
+          </tr>
+    </tbody>
+    
+
+  </table>
+
+</div>
