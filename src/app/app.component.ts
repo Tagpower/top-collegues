@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {Collegue} from "./shared/domain/collegue";
+import {CollegueService} from './shared/services/collegue.service';
 import {OnInit} from '@angular/core/src/metadata/lifecycle_hooks';
 
 const LOCAL_PATH_PREFIX = "../../assets/img/"
@@ -17,46 +18,44 @@ export class AppComponent implements OnInit {
   afficherAlert:boolean = false;
   msg:string = "";
 
+  constructor(private cs:CollegueService) { }
+
   ngOnInit() {
     this.collegues = [];
-    let thien = new Collegue("Thien-ban", LOCAL_PATH_PREFIX+"musk.jpg", 100);
-    this.collegues.push(thien);
-    let clement = new Collegue("Clément", LOCAL_PATH_PREFIX+"clement.jpg", 100);
-    this.collegues.push(clement);
-    let melodie = new Collegue("Mélodie", LOCAL_PATH_PREFIX+"chloe2.jpg", 100);
-    this.collegues.push(melodie);
-    let sandra = new Collegue("Sandra", LOCAL_PATH_PREFIX+"cat.jpg", 100);
-    this.collegues.push(sandra);
-    let assia = new Collegue("Assia", LOCAL_PATH_PREFIX+"max.jpg", 100);
-    this.collegues.push(assia);
-    let alex = new Collegue("Alexandre", LOCAL_PATH_PREFIX+"olga.jpg", 100);
-    this.collegues.push(alex);
-    let momo = new Collegue("Mohammed", LOCAL_PATH_PREFIX+"beer.png", 100);
-    this.collegues.push(momo);
-    let yves = new Collegue("Yves", LOCAL_PATH_PREFIX+"yves.jpeg", 100);
-    this.collegues.push(yves);
-
+    this.cs.listerCollegues().then(col => col.forEach(c => {this.collegues.push(new Collegue(c.pseudo, c.image, c.score)); console.log(c)}),
+                                   function(message) {throw message;}
+                                  );
   }
 
   add(pseudo:HTMLInputElement, imageUrl:HTMLInputElement) {
     this.afficherAlert = true;
-
+    
     if (!pseudo.value) {
       this.msg= `Le collègue doit avoir un pseudo.`;
     } else {
-      this.collegues.push(new Collegue(pseudo.value, imageUrl.value));
-      this.msg= `Le collègue ${pseudo.value} a été ajouté avec succès.`;
-      (<HTMLInputElement>document.getElementById("pseudo")).value = '';
-      (<HTMLInputElement>document.getElementById("image")).value = '';
+      let newCollegue = new Collegue(pseudo.value, imageUrl.value);
+      this.cs.sauvegarder(newCollegue).then((list) => {
+        if (!list) {
+          this.msg= `Il existe déjà un collègue dont le pseudo est ${pseudo.value}.`;
+        } else {
+          this.collegues.push(newCollegue);
+          this.msg= `Le collègue ${pseudo.value} a été ajouté avec succès.`;
+        }
+        pseudo.value = '';
+        imageUrl.value = '';  
+      }, function(message) {
+        throw message;
+      });
     }
 
     setTimeout(() => {
       this.closeAlert();
+      return false;
     }, 2000);
-    return false;
   }
 
   closeAlert() {
+    this.msg = '';
     this.afficherAlert = false;
   }
 

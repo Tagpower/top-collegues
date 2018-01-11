@@ -1,9 +1,9 @@
 <div class="card" style="width: 15rem; margin: 5px">
-  <img class="card-img-top" src="{{collegue._image}}">
+  <img class="card-img-top" src="{{collegue.image}}">
   <div class="card-body" style="text-align:center">
-    <div class="card-title">{{collegue._nom}}</div>
+    <div class="card-title">{{collegue.pseudo}}</div>
 
-    <b>{{collegue._score}}</b>
+    <b id="score">{{collegue.score}}</b>
 
     <app-likebuttons (reaction)="reaction($event)"></app-likebuttons>
 

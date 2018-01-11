@@ -13,6 +13,7 @@ import { HttpClient } from '@angular/common/http/src/client';
 export class UnCollegueComponent implements OnInit {
 
   @Input() collegue:Collegue
+ // score:HTMLElement;
   state = 'normal';
 
   constructor(private cs:CollegueService) { }
@@ -21,27 +22,35 @@ export class UnCollegueComponent implements OnInit {
   }
 
   reaction(event) {
+
+    let updateScore = ((collegue) => {
+      this.collegue['score'] = collegue['score'];
+    });
+    
     if (event === 'like') {
-      //this.collegue.score += 10;
-      this.cs.aimerUnCollegue(this.collegue).then(function(aaa) {
-        console.log("aaa");
-        console.log(aaa);
-      },  function(bbb) {
-        console.log("bbb")
-        console.log(bbb);
+      this.cs.aimerUnCollegue(this.collegue).then(updateScore,  function(reject) {
+
       });
     } else if (event === 'dislike') {
-      this.cs.detesterUnCollegue(this.collegue);
+      this.cs.pasAimerUnCollegue(this.collegue).then(updateScore,  function(reject) {
+
+      });
       //this.collegue.score -= 5;
     } else if (event === 'super-like') {
-      //this.collegue.score += 25;
+      this.cs.adorerUnCollegue(this.collegue).then(updateScore,  function(reject) {
+
+      });
     } else if (event === 'super-dislike') {
-      //this.collegue.score -= 15;
+      this.cs.detesterUnCollegue(this.collegue).then(updateScore,  function(reject) {
+
+      });
     }
     this.state = event;
     setTimeout(() => {
       this.state = 'normal';
     }, 100);
-}
+  }
+
+
 
 }
