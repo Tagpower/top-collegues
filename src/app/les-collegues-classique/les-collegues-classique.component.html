@@ -1,7 +1,18 @@
 <div class="row">
     
-    <p *ngFor="let col of collegues">  
-        <app-un-collegue-classique [collegue]=col></app-un-collegue-classique>
-    </p>
+    <div class="card" style="width: 15rem; margin: 5px" *ngFor="let col of collegues">
+        <a href="detail/{{col.pseudo}}">
+            <img class="card-img-top" src="{{col.image}}">        
+        </a>
+        
+        <div class="card-body" style="text-align:center">
+            <div class="card-title">{{col.pseudo}}</div>
+        
+            <b id="score">{{col.score}}</b>
+        
+            <app-likebuttons [collegue]="col"></app-likebuttons>
+        
+        </div>
+    </div>
 
 </div>

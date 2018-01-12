@@ -19,6 +19,12 @@ export class CollegueService {
     return promise;
   }
 
+  getCollegueByPseudo(pseudo: String): Promise<Collegue> {
+    return this.listerCollegues().then(collegues => {
+      return collegues.find(col => col.pseudo === pseudo);
+    });
+  }
+
   aimerUnCollegue(unCollegue:Collegue):Promise<Collegue> {
     const httpOptions = {headers:new HttpHeaders({"Content-Type":"application/json"})};
     const promise:Promise<Collegue> = this.http.patch<Collegue>(`http://localhost:8080/collegues/${unCollegue.pseudo}` , {"action":"aimer"}, httpOptions).toPromise();
