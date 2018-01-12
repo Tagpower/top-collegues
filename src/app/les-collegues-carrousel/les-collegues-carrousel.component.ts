@@ -16,9 +16,9 @@ export class LesColleguesCarrouselComponent implements OnInit {
   filtre:string;
 
   constructor(private cs:CollegueService, config:NgbCarouselConfig) { 
-    config.interval = 5000;
-    config.wrap = false;
-    config.keyboard = false;
+    config.interval = 0;
+    config.wrap = true;
+    config.keyboard = true;
     console.log(config)
   }
 
