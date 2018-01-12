@@ -2,9 +2,14 @@ import { Injectable } from '@angular/core';
 import { Collegue } from '../domain/collegue';
 import { Observable } from 'rxjs/Observable';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {BehaviorSubject}from "rxjs";
 
 @Injectable()
 export class CollegueService {
+
+  limiteSubject:BehaviorSubject<number> = new BehaviorSubject(100);
+  filtreSubject:BehaviorSubject<string> = new BehaviorSubject("");
+
   constructor(private http:HttpClient) { }
 
   listerCollegues():Promise<Collegue[]> {
@@ -48,4 +53,22 @@ export class CollegueService {
     const promise:Promise<Collegue> = this.http.patch<Collegue>(`http://localhost:8080/collegues/${unCollegue.pseudo}` , {"action":"detester"}, httpOptions).toPromise();
     return promise;  
   }
+
+  //Filtres
+  getLimiteObservable() {
+    return this.limiteSubject.asObservable();
+  }
+
+  setLimite(value) {
+    this.limiteSubject.next(value);
+  }
+
+  getFiltreObservable() {
+    return this.filtreSubject.asObservable();
+  }
+
+  setFiltre(value) {
+    this.filtreSubject.next(value);
+  }
+
 }

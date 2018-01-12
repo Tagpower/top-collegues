@@ -22,15 +22,16 @@
     </form>
   </div>
 
-  <nav>
-    <!-- définition d'un lien basé sur les routes. -->
-    <a routerLink="/classique">Classique</a>
-    <a routerLink="/tableau">Tableau</a>
-    <a routerLink="/carrousel">Carrousel</a>
-  </nav>
+  <div class="btn-group" role="group">
+      <a class="btn btn-outline-primary" routerLink="/classique" routerLinkActive="active">Classique</a>
+      <a class="btn btn-outline-primary" routerLink="/tableau" routerLinkActive="active">Tableau</a>
+      <a class="btn btn-outline-primary" routerLink="/carrousel" routerLinkActive="active">Carrousel</a>
+  </div>
 
 
 </div>
+
+<app-filter></app-filter>
 
 <!-- {{collegues | json}} -->
 

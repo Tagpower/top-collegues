@@ -11,6 +11,9 @@ import { LesColleguesTableauComponent } from './les-collegues-tableau/les-colleg
 import { LesColleguesClassiqueComponent } from './les-collegues-classique/les-collegues-classique.component';
 import { LesColleguesCarrouselComponent } from './les-collegues-carrousel/les-collegues-carrousel.component';
 import { UnCollegueDetailComponent } from './un-collegue-detail/un-collegue-detail.component';
+import { FilterComponent } from './filter/filter.component';
+import { FilterByPseudoPipe } from './shared/pipe/filter-by-pseudo.pipe';
+import { ScorePipe } from './shared/pipe/score.pipe';
 
 const appRoutes:Routes = [
   {path:"classique", component:LesColleguesClassiqueComponent},
@@ -28,6 +31,9 @@ const appRoutes:Routes = [
     LesColleguesTableauComponent,
     LesColleguesCarrouselComponent,
     UnCollegueDetailComponent,
+    FilterComponent,
+    FilterByPseudoPipe,
+    ScorePipe,
   ],
   imports: [
     BrowserModule,

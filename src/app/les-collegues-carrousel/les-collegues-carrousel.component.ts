@@ -11,8 +11,9 @@ import {NgbCarouselConfig} from '@ng-bootstrap/ng-bootstrap';
 })
 export class LesColleguesCarrouselComponent implements OnInit {
 
-  collegues:Collegue[]
-  //cs:CollegueService;
+  collegues:Collegue[];
+  limite:number;
+  filtre:string;
 
   constructor(private cs:CollegueService, config:NgbCarouselConfig) { 
     config.interval = 5000;
@@ -26,6 +27,8 @@ export class LesColleguesCarrouselComponent implements OnInit {
     this.cs.listerCollegues().then(col => col.forEach(c => {this.collegues.push(new Collegue(c.pseudo, c.image, c.score))}),
                                    function(message) {throw message;}
                                   );
+                                  this.cs.getLimiteObservable().subscribe(valeurLimite => (this.limite = valeurLimite));
+                                  this.cs.getFiltreObservable().subscribe(valeurFiltre => (this.filtre = valeurFiltre));
   }
 
 }

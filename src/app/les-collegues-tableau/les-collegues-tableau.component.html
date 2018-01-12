@@ -12,7 +12,7 @@
     <tbody>
 
         <!-- <app-un-collegue-tableau *ngFor="let col of collegues" [collegue]=col></app-un-collegue-tableau> -->
-        <tr *ngFor="let col of collegues">
+        <tr *ngFor="let col of collegues | slice:0:limite | filterByPseudo:filtre ">
 
             <td>
               <div class="image">
@@ -21,8 +21,8 @@
                 </a>
               </div>
             </td>
-            <td> <div class="card-title">{{col.pseudo}}</div> </td>
-            <td> <b id="score">{{col.score}}</b> </td>
+            <td> <div class="card-title">{{col.pseudo | uppercase}}</div> </td>
+            <td> <b id="score">{{col.score | score}}</b> </td>
             <td> <app-likebuttons [collegue]="col"></app-likebuttons> </td>
             
           </tr>

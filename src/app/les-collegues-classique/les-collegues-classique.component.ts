@@ -10,15 +10,20 @@ import { CollegueService } from '../shared/services/collegue.service';
 export class LesColleguesClassiqueComponent implements OnInit {
 
   collegues:Collegue[]
+  limite:number;
+  filtre:string;
   //cs:CollegueService;
 
   constructor(private cs:CollegueService) { }
 
   ngOnInit() {
     this.collegues = [];
-    this.cs.listerCollegues().then(col => col.forEach(c => {this.collegues.push(new Collegue(c.pseudo, c.image, c.score)); console.log(c)}),
+    this.cs.listerCollegues().then(col => col.forEach(c => {this.collegues.push(new Collegue(c.pseudo, c.image, c.score))}),
                                    function(message) {throw message;}
                                   );
+    this.cs.getLimiteObservable().subscribe(valeurLimite => (this.limite = valeurLimite));
+    this.cs.getFiltreObservable().subscribe(valeurFiltre => (this.filtre = valeurFiltre));
   }
+  
 
 }

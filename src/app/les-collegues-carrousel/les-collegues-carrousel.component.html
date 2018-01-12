@@ -1,10 +1,10 @@
 <ngb-carousel>
-  <ng-template ngbSlide *ngFor="let col of collegues">
+  <ng-template ngbSlide *ngFor="let col of collegues | slice:0:limite | filterByPseudo:filtre">
     <img src="{{col.imageUrl}}">
     <div class="carousel-caption">
       <div class="inner-caption">
-        <h3>{{col.score}}</h3>
-        <h5>{{col.pseudo}}</h5>
+        <h3>{{col.score | score}}</h3>
+        <h5>{{col.pseudo | uppercase}}</h5>
         <app-likebuttons [collegue]="col"></app-likebuttons>
       </div>
     </div>
