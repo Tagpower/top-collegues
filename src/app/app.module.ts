@@ -14,6 +14,9 @@ import { UnCollegueDetailComponent } from './un-collegue-detail/un-collegue-deta
 import { FilterComponent } from './filter/filter.component';
 import { FilterByPseudoPipe } from './shared/pipe/filter-by-pseudo.pipe';
 import { ScorePipe } from './shared/pipe/score.pipe';
+import { EnLigneComponent } from './en-ligne/en-ligne.component';
+import { EnLigneService } from './shared/services/en-ligne.service';
+import { VotreDernierAvisComponent } from './votre-dernier-avis/votre-dernier-avis.component';
 
 const appRoutes:Routes = [
   {path:"classique", component:LesColleguesClassiqueComponent},
@@ -34,6 +37,8 @@ const appRoutes:Routes = [
     FilterComponent,
     FilterByPseudoPipe,
     ScorePipe,
+    EnLigneComponent,
+    VotreDernierAvisComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,7 +47,8 @@ const appRoutes:Routes = [
     RouterModule.forRoot(appRoutes)
   ],
   providers: [
-    CollegueService
+    CollegueService,
+    EnLigneService
   ],
 bootstrap: [AppComponent]
 })

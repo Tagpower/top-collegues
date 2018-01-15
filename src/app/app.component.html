@@ -1,8 +1,8 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div style="text-align:left">
   <div class="jumbotron"> 
-    <h1>Top Collègues</h1>
-    <p>Les meilleurs collègues du moment</p>
+    <h1>Top Collègues  </h1>
+    <p>Les meilleurs collègues du moment <app-en-ligne></app-en-ligne> </p>
 
     <form class=form-horizontal>
       <div class="form-group">
@@ -22,16 +22,15 @@
     </form>
   </div>
 
-  <div class="btn-group" role="group">
-      <a class="btn btn-outline-primary" routerLink="/classique" routerLinkActive="active">Classique</a>
-      <a class="btn btn-outline-primary" routerLink="/tableau" routerLinkActive="active">Tableau</a>
-      <a class="btn btn-outline-primary" routerLink="/carrousel" routerLinkActive="active">Carrousel</a>
+  <div class="btn-group" role="group" style="margin:25px">
+    <a class="btn btn-outline-primary" routerLink="/classique" routerLinkActive="active">Classique</a>
+    <a class="btn btn-outline-primary" routerLink="/tableau" routerLinkActive="active">Tableau</a>
+    <a class="btn btn-outline-primary" routerLink="/carrousel" routerLinkActive="active">Carrousel</a>
   </div>
-
+  <app-filter></app-filter>
 
 </div>
 
-<app-filter></app-filter>
 
  <!-- {{collegues | json}}  -->
 

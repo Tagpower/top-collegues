@@ -1,8 +1,7 @@
-<div class="input-group mb-3">
-  <span class="input-group-addon" id="basic-addon1">Limite</span>
-  <input id="limite" #limite type="text" class="form-control" name="limite" (change)="this.cs.setLimite(limite.value)">
-</div>
-<div class="input-group">
-  <span class="input-group-addon" id="basic-addon1">Pseudo</span>
-  <input id="filtrePseudo" #filtrePseudo type="text" class="form-control" name="filtrePseudo" (change)="this.cs.setFiltre(filtrePseudo.value)">
+<div class="input-group mb-4" style="margin-left:25px">
+  <span class="input-group-addon"  id="basic-addon1">Limite</span>
+  <input id="limite" style="margin-right:5px" #limite type="text" class="form-control" name="limite" placeholder="Limiter le nombre de collègues affichés" (change)="this.cs.setLimite(limite.value)">
+
+  <span class="input-group-addon" id="basic-addon2">Pseudo</span>
+  <input id="filtrePseudo"  #filtrePseudo type="text" class="form-control" name="filtrePseudo" placeholder="Filtrer les collègues par pseudo" (change)="this.cs.setFiltre(filtrePseudo.value)">
 </div>  

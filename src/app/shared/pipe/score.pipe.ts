@@ -8,7 +8,7 @@ export class ScorePipe implements PipeTransform {
   transform(value: number, args?: any): any {
     if (value > 0) {
       return "+" + value;
-    } else if (value < 0) {
+    } else if (value <= 0) {
       return value;
     }
   }

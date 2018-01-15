@@ -6,10 +6,8 @@
       </a>
     </div>
     <div class="card-body text-center">
-      <h6 class="card-title">{{collegue.pseudo | uppercase}}
-        <small *ngIf="collegue.name">({{collegue.name}})</small>
-      </h6>
-      <h5 class="card-text">{{collegue.score}}</h5>
+      <h6 class="card-title">{{collegue.pseudo | uppercase}}</h6>
+      <h5 class="card-text">{{collegue.score | score}}</h5>
   
     </div>
     <div class="card-footer text-center">

@@ -22,7 +22,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.collegues = [];
-    this.cs.listerCollegues().subscribe(col => col.forEach(c => {console.log(c); this.collegues.push(new Collegue(c.pseudo, c.image, c.score));}),
+    this.cs.listerCollegues().subscribe(col => col.forEach(c => this.collegues.push(new Collegue(c.pseudo, c.image, c.score))),
                                    function(message) {throw message;}
                                   );
   }
