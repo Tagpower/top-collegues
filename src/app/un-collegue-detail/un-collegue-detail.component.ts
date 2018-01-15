@@ -18,7 +18,7 @@ export class UnCollegueDetailComponent implements OnInit {
     if (!this.collegue) {
       this.cs
         .getCollegueByPseudo(this.route.snapshot.params['pseudo'])
-        .then(collegue => {
+        .subscribe(collegue => {
           this.collegue = collegue;
         });
     }

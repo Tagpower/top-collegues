@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Collegue} from '../shared/domain/collegue';
 import { CollegueService } from '../shared/services/collegue.service';
 import {NgbCarouselConfig} from '@ng-bootstrap/ng-bootstrap';
+import { Observable } from 'rxjs/';
 
 @Component({
   selector: 'app-les-collegues-carrousel',
@@ -11,7 +12,7 @@ import {NgbCarouselConfig} from '@ng-bootstrap/ng-bootstrap';
 })
 export class LesColleguesCarrouselComponent implements OnInit {
 
-  collegues:Collegue[];
+  collegues:Observable<Collegue[]>;
   limite:number;
   filtre:string;
 
@@ -23,12 +24,9 @@ export class LesColleguesCarrouselComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.collegues = [];
-    this.cs.listerCollegues().then(col => col.forEach(c => {this.collegues.push(new Collegue(c.pseudo, c.image, c.score))}),
-                                   function(message) {throw message;}
-                                  );
-                                  this.cs.getLimiteObservable().subscribe(valeurLimite => (this.limite = valeurLimite));
-                                  this.cs.getFiltreObservable().subscribe(valeurFiltre => (this.filtre = valeurFiltre));
+    this.collegues = this.cs.listerCollegues();
+    this.cs.getLimiteObservable().subscribe(valeurLimite => (this.limite = valeurLimite));
+    this.cs.getFiltreObservable().subscribe(valeurFiltre => (this.filtre = valeurFiltre));
   }
 
 }

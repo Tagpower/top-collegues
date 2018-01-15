@@ -12,7 +12,7 @@
     <tbody>
 
         <!-- <app-un-collegue-tableau *ngFor="let col of collegues" [collegue]=col></app-un-collegue-tableau> -->
-        <tr *ngFor="let col of collegues | slice:0:limite | filterByPseudo:filtre ">
+        <tr *ngFor="let col of collegues | async | slice:0:limite | filterByPseudo:filtre ">
 
             <td>
               <div class="image">

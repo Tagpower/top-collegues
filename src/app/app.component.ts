@@ -22,7 +22,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.collegues = [];
-    this.cs.listerCollegues().then(col => col.forEach(c => {this.collegues.push(new Collegue(c.pseudo, c.image, c.score));}),
+    this.cs.listerCollegues().subscribe(col => col.forEach(c => {console.log(c); this.collegues.push(new Collegue(c.pseudo, c.image, c.score));}),
                                    function(message) {throw message;}
                                   );
   }
@@ -34,18 +34,28 @@ export class AppComponent implements OnInit {
       this.msg= `Le collègue doit avoir un pseudo.`;
     } else {
       let newCollegue = new Collegue(pseudo.value, imageUrl.value);
-      this.cs.sauvegarder(newCollegue).then((list) => {
-        if (!list) {
-          this.msg= `Il existe déjà un collègue dont le pseudo est ${pseudo.value}.`;
-        } else {
-          this.collegues.push(newCollegue);
-          this.msg= `Le collègue ${pseudo.value} a été ajouté avec succès.`;
-        }
+      // this.cs.sauvegarder(newCollegue).subscribe((list) => {
+      //   if (!list) {
+      //     this.msg= `Il existe déjà un collègue dont le pseudo est ${pseudo.value}.`;
+      //   } else {
+      //     this.collegues.push(newCollegue);
+      //     this.msg= `Le collègue ${pseudo.value} a été ajouté avec succès.`;
+      //   }
+      //   pseudo.value = '';
+      //   imageUrl.value = '';  
+      // }, function(message) {
+      //   throw message;
+      // });
+      if (this.collegues.find(col => col.pseudo == pseudo.value)) {
+        //console.log(this.cs.getCollegueByPseudo(pseudo.value).subscribe(a => a.pseudo));
+        this.msg= `Il existe déjà un collègue dont le pseudo est ${pseudo.value}.`;
+      } else {
+        this.cs.sauvegarder(newCollegue);
+        //this.collegues.push(newCollegue);
+        this.msg= `Le collègue ${pseudo.value} a été ajouté avec succès.`;
         pseudo.value = '';
         imageUrl.value = '';  
-      }, function(message) {
-        throw message;
-      });
+      }
     }
 
     setTimeout(() => {

@@ -1,5 +1,5 @@
 <ngb-carousel>
-  <ng-template ngbSlide *ngFor="let col of collegues | slice:0:limite | filterByPseudo:filtre ">
+  <ng-template ngbSlide *ngFor="let col of collegues | async | slice:0:limite | filterByPseudo:filtre ">
     <img src="{{col.image}}">
     <div class="carousel-caption">
       <div class="inner-caption">

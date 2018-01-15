@@ -21,28 +21,28 @@ export class LikebuttonsComponent implements OnInit {
 
   jaime() {
    // this.reaction.emit('like');
-   this.cs.aimerUnCollegue(this.collegue).then(((collegue) => {
+   this.cs.aimerUnCollegue(this.collegue).subscribe(((collegue) => {
     this.collegue['score'] = collegue['score'];
     }),  function(reject) {});
   }
 
   jaimepas() {
     //this.reaction.emit('dislike');
-    this.cs.pasAimerUnCollegue(this.collegue).then(((collegue) => {
+    this.cs.pasAimerUnCollegue(this.collegue).subscribe(((collegue) => {
       this.collegue['score'] = collegue['score'];
       }),  function(reject) {});
   }
 
   jadore() {
     //this.reaction.emit('super-like');  
-     this.cs.adorerUnCollegue(this.collegue).then(((collegue) => {
+     this.cs.adorerUnCollegue(this.collegue).subscribe(((collegue) => {
       this.collegue['score'] = collegue['score'];
       }),  function(reject) {});
   }
 
   jedeteste() {
     //this.reaction.emit('super-dislike');
-    this.cs.detesterUnCollegue(this.collegue).then(((collegue) => {
+    this.cs.detesterUnCollegue(this.collegue).subscribe(((collegue) => {
       this.collegue['score'] = collegue['score'];
       }),  function(reject) {});
   }

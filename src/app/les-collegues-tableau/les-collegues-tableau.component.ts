@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Collegue} from '../shared/domain/collegue';
 import { CollegueService } from '../shared/services/collegue.service';
+import { Observable } from 'rxjs/';
 
 @Component({
   selector: 'app-les-collegues-tableau',
@@ -9,17 +10,14 @@ import { CollegueService } from '../shared/services/collegue.service';
 })
 export class LesColleguesTableauComponent implements OnInit {
 
-  collegues:Collegue[]
+  collegues:Observable<Collegue[]>
   limite:number;
   filtre:string
 
   constructor(private cs:CollegueService) { }
 
   ngOnInit() {
-    this.collegues = [];
-    this.cs.listerCollegues().then(col => col.forEach(c => {this.collegues.push(new Collegue(c.pseudo, c.image, c.score))}),
-                                   function(message) {throw message;}
-                                  );
+    this.collegues = this.cs.listerCollegues();
     this.cs.getLimiteObservable().subscribe(valeurLimite => (this.limite = valeurLimite));
     this.cs.getFiltreObservable().subscribe(valeurFiltre => (this.filtre = valeurFiltre));
                               

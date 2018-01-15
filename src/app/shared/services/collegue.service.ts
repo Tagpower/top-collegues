@@ -1,57 +1,78 @@
 import { Injectable } from '@angular/core';
 import { Collegue } from '../domain/collegue';
-import { Observable } from 'rxjs/Observable';
+import { Observable, BehaviorSubject } from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {BehaviorSubject}from "rxjs";
 
 @Injectable()
 export class CollegueService {
+  
+  colleguesSubject:BehaviorSubject<Collegue[]> = new BehaviorSubject([]);
+
 
   limiteSubject:BehaviorSubject<number> = new BehaviorSubject(100);
   filtreSubject:BehaviorSubject<string> = new BehaviorSubject("");
 
-  constructor(private http:HttpClient) { }
 
-  listerCollegues():Promise<Collegue[]> {
-  // récupérer la liste des collègues côté serveur
-    const listeCollegues:Promise<Collegue[]> = this.http.get<Collegue[]>("http://localhost:8080/collegues").toPromise();
-    return listeCollegues;
+  constructor(private http:HttpClient) { 
+    this.refresh()
   }
 
-  sauvegarder(newCollegue:Collegue):Promise<Collegue> {
+  // listerCollegues():Promise<Collegue[]> {
+  // // récupérer la liste des collègues côté serveur
+  //   const listeCollegues:Promise<Collegue[]> = this.http.get<Collegue[]>("http://localhost:8080/collegues").toPromise();
+  //   return listeCollegues;
+  // }
+
+  // listerCollegues():Observable<Collegue[]> {
+  //   return this.http.get<Collegue[]>("http://localhost:8080/collegues").do(col => this.colleguesSubject.next(col)); 
+  // }
+
+  listerCollegues():Observable<Collegue[]> {
+    return this.colleguesSubject.asObservable();
+  }
+
+  refresh() {
+    this.http.get<Collegue[]>("http://localhost:8080/collegues").subscribe(col => this.colleguesSubject.next(col));
+  }
+
+  // sauvegarder(newCollegue:Collegue):Promise<Collegue> {
+  //   const httpOptions = {headers:new HttpHeaders({"Content-Type":"application/json"})};
+  //   const promise:Promise<Collegue> = this.http.post<Collegue>("http://localhost:8080/collegues", JSON.stringify(newCollegue), httpOptions).toPromise();
+  //   return promise;
+  // }
+
+  sauvegarder(newCollegue:Collegue):void {
     const httpOptions = {headers:new HttpHeaders({"Content-Type":"application/json"})};
-    const promise:Promise<Collegue> = this.http.post<Collegue>("http://localhost:8080/collegues", JSON.stringify(newCollegue), httpOptions).toPromise();
-    return promise;
+    this.http.post<Collegue[]>("http://localhost:8080/collegues", JSON.stringify(newCollegue), httpOptions).subscribe(
+      col => this.colleguesSubject.next(col)
+    );
+    //return newCollegue;
   }
 
-  getCollegueByPseudo(pseudo: String): Promise<Collegue> {
-    return this.listerCollegues().then(collegues => {
+  getCollegueByPseudo(pseudo: String): Observable<Collegue> {
+    return this.listerCollegues().map(collegues => {
       return collegues.find(col => col.pseudo === pseudo);
     });
   }
 
-  aimerUnCollegue(unCollegue:Collegue):Promise<Collegue> {
+  aimerUnCollegue(unCollegue:Collegue):Observable<Collegue> {
     const httpOptions = {headers:new HttpHeaders({"Content-Type":"application/json"})};
-    const promise:Promise<Collegue> = this.http.patch<Collegue>(`http://localhost:8080/collegues/${unCollegue.pseudo}` , {"action":"aimer"}, httpOptions).toPromise();
-    return promise;
+    return Observable.from(this.http.patch<Collegue>('http://localhost:8080/collegues/' + unCollegue.pseudo , {"action":"aimer"}, httpOptions));
   }
 
-  pasAimerUnCollegue(unCollegue:Collegue):Promise<Collegue> {
+  pasAimerUnCollegue(unCollegue:Collegue):Observable<Collegue> {
     const httpOptions = {headers:new HttpHeaders({"Content-Type":"application/json"})};
-    const promise:Promise<Collegue> = this.http.patch<Collegue>(`http://localhost:8080/collegues/${unCollegue.pseudo}` , {"action":"pasAimer"}, httpOptions).toPromise();
-    return promise;
+    return Observable.from(this.http.patch<Collegue>('http://localhost:8080/collegues/' + unCollegue.pseudo , {"action":"pasAimer"}, httpOptions));
   }
 
-  adorerUnCollegue(unCollegue:Collegue):Promise<Collegue> {
+  adorerUnCollegue(unCollegue:Collegue):Observable<Collegue> {
     const httpOptions = {headers:new HttpHeaders({"Content-Type":"application/json"})};
-    const promise:Promise<Collegue> = this.http.patch<Collegue>(`http://localhost:8080/collegues/${unCollegue.pseudo}` , {"action":"adorer"}, httpOptions).toPromise();
-    return promise;
+    return Observable.from(this.http.patch<Collegue>('http://localhost:8080/collegues/' + unCollegue.pseudo , {"action":"adorer"}, httpOptions));
   }
 
-  detesterUnCollegue(unCollegue:Collegue):Promise<Collegue> {
+  detesterUnCollegue(unCollegue:Collegue):Observable<Collegue> {
     const httpOptions = {headers:new HttpHeaders({"Content-Type":"application/json"})};
-    const promise:Promise<Collegue> = this.http.patch<Collegue>(`http://localhost:8080/collegues/${unCollegue.pseudo}` , {"action":"detester"}, httpOptions).toPromise();
-    return promise;  
+    return Observable.from(this.http.patch<Collegue>('http://localhost:8080/collegues/' + unCollegue.pseudo , {"action":"detester"}, httpOptions));
   }
 
   //Filtres
