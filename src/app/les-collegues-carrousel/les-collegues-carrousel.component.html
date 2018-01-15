@@ -4,8 +4,7 @@
     <div class="carousel-caption">
       <div class="inner-caption">
         <h3>{{col.pseudo | uppercase}}</h3>
-        <h5>{{col.score | score}}</h5>
-        <app-likebuttons [collegue]="col"></app-likebuttons>
+        <h5 [ngStyle]="{'color': col.score > 0 ? 'green' : (col.score == 0 ? 'gray' : 'red')}">{{col.score | score}}</h5>        <app-likebuttons [collegue]="col"></app-likebuttons>
       </div>
     </div>
   </ng-template>

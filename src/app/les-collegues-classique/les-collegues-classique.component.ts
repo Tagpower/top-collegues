@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Collegue} from '../shared/domain/collegue';
 import { CollegueService } from '../shared/services/collegue.service';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs/';
 
 @Component({
   selector: 'app-les-collegues-classique',

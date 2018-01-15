@@ -7,7 +7,7 @@
     </div>
     <div class="card-body text-center">
       <h6 class="card-title">{{collegue.pseudo | uppercase}}</h6>
-      <h5 class="card-text">{{collegue.score | score}}</h5>
+      <h5 class="card-text" [ngStyle]="{'color': col.score > 0 ? 'green' : (col.score == 0 ? 'gray' : 'red')}">{{collegue.score | score}}</h5>
   
     </div>
     <div class="card-footer text-center">

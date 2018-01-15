@@ -23,14 +23,14 @@ export class LikebuttonsComponent implements OnInit {
    // this.reaction.emit('like');
    this.cs.aimerUnCollegue(this.collegue).subscribe(((collegue) => {
     this.collegue['score'] = collegue['score'];
-    }),  function(reject) {});
+    }));
   }
 
   jaimepas() {
     //this.reaction.emit('dislike');
     this.cs.pasAimerUnCollegue(this.collegue).subscribe(((collegue) => {
       this.collegue['score'] = collegue['score'];
-      }),  function(reject) {});
+      }));
   }
 
   jadore() {

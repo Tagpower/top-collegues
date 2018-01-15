@@ -22,7 +22,7 @@
               </div>
             </td>
             <td> <h5>{{col.pseudo | uppercase}}</h5> </td>
-            <td> <h5 id="score">{{col.score | score}}</h5> </td>
+            <td> <h5 id="score" [ngStyle]="{'color': col.score > 0 ? 'green' : (col.score == 0 ? 'gray' : 'red')}">{{col.score | score}}</h5> </td>
             <td> <app-likebuttons [collegue]="col"></app-likebuttons> </td>
             
           </tr>
