@@ -14,16 +14,20 @@ export class VotreDernierAvisComponent implements OnInit {
   constructor(private cs:CollegueService) { }
 
   ngOnInit() {
-    this.cs.avis.subscribe(avis => {
+    this.cs.vote.subscribe(vote => {
       //console.log(avis);
-      this.message = avis;
-      if (avis.includes("aimez pas")) {
-        this.type = 'secondary';
-      } else if(avis.includes("aimez")) {
+      this.message = vote.avis;
+      if(vote.avis === "aimer") {
+        this.message = `Vous aimez ${vote.collegue.pseudo} : +10 points`;
         this.type = 'primary';
-      } else if (avis.includes("A-DO-REZ")) {
+      } else if (vote.avis === "pasAimer") {
+        this.message = `Vous n'aimez pas ${vote.collegue.pseudo} : -5 points`;
+        this.type = 'secondary';
+      } else if (vote.avis === "adorer") {
+        this.message = `Vous A-DO-REZ ${vote.collegue.pseudo} : +25 points <3`;
         this.type = 'success';
-      } else if (avis.includes("DÉ-TES-TEZ"){
+      } else if (vote.avis === "detester"){
+        this.message = `Vous DÉ-TES-TEZ ${vote.collegue.pseudo} : -15 points !`;
         this.type = 'danger';
       }
     });
