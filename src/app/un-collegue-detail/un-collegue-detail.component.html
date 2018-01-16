@@ -1,13 +1,12 @@
 <div class="card" id=collegue-card *ngIf="collegue">
     <div class="imgContainer">
   
-      <a [routerLink]="['/detail', collegue.pseudo]">
         <img class="card-img-top" src="{{collegue.image}}" alt="Card image cap">
-      </a>
+      
     </div>
     <div class="card-body text-center">
       <h6 class="card-title">{{collegue.pseudo | uppercase}}</h6>
-      <h5 class="card-text" [ngStyle]="{'color': col.score > 0 ? 'green' : (col.score == 0 ? 'gray' : 'red')}">{{collegue.score | score}}</h5>
+      <h5 class="card-text" [ngStyle]="{'color': collegue.score > 0 ? 'green' : (collegue.score == 0 ? 'gray' : 'red')}">{{collegue.score | score}}</h5>
   
     </div>
     <div class="card-footer text-center">

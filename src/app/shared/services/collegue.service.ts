@@ -11,7 +11,7 @@ export class CollegueService {
 
   limiteSubject:BehaviorSubject<number> = new BehaviorSubject(100);
   filtreSubject:BehaviorSubject<string> = new BehaviorSubject("");
-  voteSubject: BehaviorSubject<{collegue:Collegue, avis:string}> = new BehaviorSubject({collegue:null, avis:""});
+  voteSubject: BehaviorSubject<{collegue:Collegue, avis:string, score:number}> = new BehaviorSubject({collegue:null, avis:"", score:0});
   public vote = this.voteSubject.asObservable();
 
   constructor(private http:HttpClient) { 
@@ -61,25 +61,25 @@ export class CollegueService {
     const httpOptions = {headers:new HttpHeaders({"Content-Type":"application/json"})};
     return Observable.from(this.http.patch<Collegue>('http://localhost:8080/collegues/' + unCollegue.pseudo , {"action":"aimer"}, httpOptions))
     //.do(col => this.avisSubject.next(`Vous aimez ${col.pseudo} : +10 points`));
-    .do(col => this.voteSubject.next({collegue:col, avis:"aimer"}));
+    .do(col => this.voteSubject.next({collegue:col, avis:"aimer", score:col.score}));
   }
 
   pasAimerUnCollegue(unCollegue:Collegue):Observable<Collegue> {
     const httpOptions = {headers:new HttpHeaders({"Content-Type":"application/json"})};
     return Observable.from(this.http.patch<Collegue>('http://localhost:8080/collegues/' + unCollegue.pseudo , {"action":"pasAimer"}, httpOptions))
-    .do(col => this.voteSubject.next({collegue:col, avis:"pasAimer"}));
+    .do(col => this.voteSubject.next({collegue:col, avis:"pasAimer", score:col.score}));
   }
 
   adorerUnCollegue(unCollegue:Collegue):Observable<Collegue> {
     const httpOptions = {headers:new HttpHeaders({"Content-Type":"application/json"})};
     return Observable.from(this.http.patch<Collegue>('http://localhost:8080/collegues/' + unCollegue.pseudo , {"action":"adorer"}, httpOptions))
-    .do(col => this.voteSubject.next({collegue:col, avis:"adorer"})); //❤
+    .do(col => this.voteSubject.next({collegue:col, avis:"adorer", score:col.score})); //❤
   }
 
   detesterUnCollegue(unCollegue:Collegue):Observable<Collegue> {
     const httpOptions = {headers:new HttpHeaders({"Content-Type":"application/json"})};
     return Observable.from(this.http.patch<Collegue>('http://localhost:8080/collegues/' + unCollegue.pseudo , {"action":"detester"}, httpOptions))
-    .do(col => this.voteSubject.next({collegue:col, avis:"detester"}));
+    .do(col => this.voteSubject.next({collegue:col, avis:"detester", score:col.score}));
   }
 
   //Filtres

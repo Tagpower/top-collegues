@@ -1,0 +1,20 @@
+<div class="list-group">
+    <div class="list-group-item list-group-item-action flex-column align-items-start">
+      <div class="d-flex w-100 justify-content-between">
+        <h4>Historique des votes</h4>
+      </div>
+    </div>
+    <div id="parent" *ngFor="let vote of votes | async" class="list-group-item list-group-item-action flex-column align-items-start">
+      <div class="d-flex w-100">
+        <div class="img-container mb-1">
+          <img src="{{vote.collegue.image}}" style="width:30px;height:30px;">
+        </div>
+        <h6 class="mb-1" style="margin-left:5px"> Quelqu'un {{vote.avis | avis}} {{vote.collegue.pseudo}}.</h6>
+        <!-- <small class="text-muted">{{vote.date | date:'dd/MM/yyyy hh:mm:ss':'+01'}}</small> -->
+      </div>
+      <p class="mb-1">Son score vaut maintenant {{vote.score | score}}</p>
+      <small>
+        <!-- <button type="button" class="btn btn-link" (click)="hideThisVote(vote)">Supprimer</button> -->
+      </small>
+    </div>
+  </div>

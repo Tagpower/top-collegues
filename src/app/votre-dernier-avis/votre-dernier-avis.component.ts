@@ -15,20 +15,23 @@ export class VotreDernierAvisComponent implements OnInit {
 
   ngOnInit() {
     this.cs.vote.subscribe(vote => {
-      //console.log(avis);
-      this.message = vote.avis;
-      if(vote.avis === "aimer") {
-        this.message = `Vous aimez ${vote.collegue.pseudo} : +10 points`;
-        this.type = 'primary';
-      } else if (vote.avis === "pasAimer") {
-        this.message = `Vous n'aimez pas ${vote.collegue.pseudo} : -5 points`;
-        this.type = 'secondary';
-      } else if (vote.avis === "adorer") {
-        this.message = `Vous A-DO-REZ ${vote.collegue.pseudo} : +25 points <3`;
-        this.type = 'success';
-      } else if (vote.avis === "detester"){
-        this.message = `Vous DÉ-TES-TEZ ${vote.collegue.pseudo} : -15 points !`;
-        this.type = 'danger';
+      switch (vote.avis) {
+        case "aimer":
+          this.message = `Vous aimez ${vote.collegue.pseudo} : +10 points`;
+          this.type = 'primary';
+          break;
+        case "pasAimer":
+          this.message = `Vous n'aimez pas ${vote.collegue.pseudo} : -5 points`;
+          this.type = 'secondary';
+          break;
+        case "adorer":
+          this.message = `Vous A-DO-REZ ${vote.collegue.pseudo} : +25 points <3`;
+          this.type = 'success';
+          break;
+        case "detester":
+          this.message = `Vous DÉ-TES-TEZ ${vote.collegue.pseudo} : -15 points !`;
+          this.type = 'danger';
+          break;
       }
     });
 }

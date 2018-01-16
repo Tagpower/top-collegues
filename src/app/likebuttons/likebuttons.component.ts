@@ -37,14 +37,18 @@ export class LikebuttonsComponent implements OnInit {
     //this.reaction.emit('super-like');  
      this.cs.adorerUnCollegue(this.collegue).subscribe(((collegue) => {
       this.collegue['score'] = collegue['score'];
-      }),  function(reject) {});
+      }));
   }
 
   jedeteste() {
     //this.reaction.emit('super-dislike');
     this.cs.detesterUnCollegue(this.collegue).subscribe(((collegue) => {
       this.collegue['score'] = collegue['score'];
-      }),  function(reject) {});
+      }));
+  }
+
+  laisserCommentaire() {
+
   }
 
 }

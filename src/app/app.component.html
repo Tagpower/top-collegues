@@ -34,13 +34,20 @@
 <app-votre-dernier-avis></app-votre-dernier-avis>
 
 
+
  <!-- {{collegues | json}}  -->
 
-<div class="album text-muted">
-    <div class="container" id=content>
+<div class="row">
+    <div class="col-md-1">
+
+    </div>
+    <div class="col-md-7" id=content>
 
         <router-outlet></router-outlet>
 
+    </div>
+    <div class="col-md-4">
+        <app-historique-votes></app-historique-votes>
     </div>
 </div>
 

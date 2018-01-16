@@ -3,4 +3,22 @@
   <button type="button" class="btn btn-outline-secondary" (click)=jaimepas()>J'aime pas</button>
   <button type="button" class="btn btn-outline-success" (click)=jadore()>J'adore</button>
   <button type="button" class="btn btn-outline-danger" (click)=jedeteste()>Je déteste</button>
+  <br/>
+  <button type="button" class="btn btn-outline-warning" (click)=laisserCommentaire()>Commentaire</button>
 </p>
+
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Commentaire</h4>
+    <button type="button" class="close" aria-label="close" (click)="d('Cross')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <label for="commentArea">Rédiger un commentaire :</label>
+    <input type="text" [(ngModel)]="commentaire" required/>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-warning" (click)="open(content)" >Poster</button>
+  </div>
+</ng-template>
