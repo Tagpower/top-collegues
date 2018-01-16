@@ -4,7 +4,7 @@
   <button type="button" class="btn btn-outline-success" (click)=jadore()>J'adore</button>
   <button type="button" class="btn btn-outline-danger" (click)=jedeteste()>Je déteste</button>
   <br/>
-  <button type="button" class="btn btn-outline-warning" (click)=laisserCommentaire()>Commentaire</button>
+  <button type="button" class="btn btn-outline-warning" (click)=openModal(content)>Commentaire</button>
 </p>
 
 <ng-template #content let-c="close" let-d="dismiss">
@@ -15,10 +15,20 @@
     </button>
   </div>
   <div class="modal-body">
-    <label for="commentArea">Rédiger un commentaire :</label>
-    <input type="text" [(ngModel)]="commentaire" required/>
+
+    <form (ngSubmit)="laisserCommentaire(commentaireForm.text)" #commentaireForm="ngForm" novalidate>
+      <label for="commentArea">Rédiger un commentaire :</label>
+      <input type="text" name="commentaire" [(ngModel)]="commentaire.text" #commentaire="ngModel" required minlength="10" maxlength="255"/>
+      <br>
+      <small [hidden]="commentaire.valid || (commentaire.pristine && !commentaireForm.submitted)">
+        Le texte doit contenir entre 10 et 255 caractères.
+      </small>
+      
+      <button class="btn btn-warning" type="submit" (click)="laisserCommentaire(commentaire.text); c('Close click')" >Poster</button>
+
+    </form>
+
   </div>
   <div class="modal-footer">
-    <button class="btn btn-warning" (click)="open(content)" >Poster</button>
   </div>
 </ng-template>
